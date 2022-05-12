@@ -1,2 +1,3 @@
-# Better unit tests
-Proposal for structuring unit tests code.
+# Better unit tests in C# with xUnit
+
+Proposal for structuring unit tests code in C# with xUnit.
