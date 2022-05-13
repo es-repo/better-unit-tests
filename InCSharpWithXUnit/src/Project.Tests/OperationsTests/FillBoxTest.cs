@@ -6,7 +6,7 @@ using Xunit;
 
 namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.OperationsTests
 {
-    public static class FillBoxTests
+    public static class FillBoxTest
     {
         public sealed record Args
         {
@@ -60,11 +60,11 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.OperationsTests
 
             static object[] BoxMock_LabelsAndThings_BoxMockCallsOpenThenPutInsideThenClose_ThingsWithLabelEndWithIngoreExpected()
             {
-                var actualMockCallTrace = new CallTrace();
+                var callTraceActual = new CallTrace();
 
                 var args = new Args
                 {
-                    Box = new BoxMock(actualMockCallTrace),
+                    Box = new BoxMock(callTraceActual),
 
                     LabelsAndThings = new Dictionary<string, Thing>
                     {
@@ -73,25 +73,25 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.OperationsTests
                         { "Label 3", new Thing { Size = 3 } },
                     },
 
-                    WriteLog = CreateWriteLogMock(actualMockCallTrace)
+                    WriteLog = CreateWriteLogMock(callTraceActual)
                 };
 
-                var expectedMockCallTrace = new CallTrace();
+                var callTraceExpected = new CallTrace();
 
-                expectedMockCallTrace.Add<IBox>(box => box.Open());
-                expectedMockCallTrace.Add<WriteLog>(writeLog => writeLog("The box is opened."));
-                expectedMockCallTrace.Add<IBox>(box => box.PutInside(new Thing { Size = 1 }, "Label 1"));
-                expectedMockCallTrace.Add<IBox>(box => box.PutInside(new Thing { Size = 2 }, "Label 2 Ignore"));
-                expectedMockCallTrace.Add<IBox>(box => box.PutInside(new Thing { Size = 3 }, "Label 3"));
-                expectedMockCallTrace.Add<IBox>(box => box.Close());
-                expectedMockCallTrace.Add<WriteLog>(writeLog => writeLog("The box is closed."));
+                callTraceExpected.Add<IBox>(box => box.Open());
+                callTraceExpected.Add<WriteLog>(writeLog => writeLog("The box is opened."));
+                callTraceExpected.Add<IBox>(box => box.PutInside(new Thing { Size = 1 }, "Label 1"));
+                callTraceExpected.Add<IBox>(box => box.PutInside(new Thing { Size = 2 }, "Label 2 Ignore"));
+                callTraceExpected.Add<IBox>(box => box.PutInside(new Thing { Size = 3 }, "Label 3"));
+                callTraceExpected.Add<IBox>(box => box.Close());
+                callTraceExpected.Add<WriteLog>(writeLog => writeLog("The box is closed."));
 
                 var expected = new Dictionary<string, Thing>
                 {
                     { "Label 2 Ignore", new Thing { Size = 2 } },
                 };
 
-                return new object[] { args, actualMockCallTrace, expectedMockCallTrace, expected };
+                return new object[] { args, callTraceActual, callTraceExpected, expected };
             }
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -99,11 +99,11 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.OperationsTests
 
         [Theory]
         [ClassData(typeof(TestCases))]
-        public static void Test(Args args, CallTrace actualMockCallTrace, CallTrace expectedMockCallTrace, Dictionary<string, Thing> expected)
+        public static void Test(Args args, CallTrace callTraceActual, CallTrace callTraceExpected, Dictionary<string, Thing> expected)
         {
             var actual = Operations.FillBox(args.Box, args.LabelsAndThings, args.WriteLog);
 
-            Assert.Equal(actualMockCallTrace, expectedMockCallTrace);
+            Assert.Equal(callTraceActual, callTraceExpected);
             Assert.Equal(expected, actual);
         }
     }

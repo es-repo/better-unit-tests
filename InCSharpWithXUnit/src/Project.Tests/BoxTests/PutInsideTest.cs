@@ -5,7 +5,7 @@ using Xunit;
 
 namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 {
-    public static class PutInsideTests
+    public static class PutInsideTest
     {
         public sealed record Args
         {
@@ -28,7 +28,7 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 
             static object[] OpenBox_ThingWithSizeLessThanAvailableSpace_UniqueLabel_ThingAddedIntoBox_TrueExpected()
             {
-                var actualState = new Box(
+                var stateActual = new Box(
                     new Dictionary<string, Thing>
                     {
                         { "Label1", new Thing { Size = 10 } },
@@ -45,7 +45,7 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
                     Label = "Label3"
                 };
 
-                var expectedState = new Box(new Dictionary<string, Thing>
+                var stateExpected = new Box(new Dictionary<string, Thing>
                 {
                     { "Label1", new Thing { Size = 10 } },
                     { "Label2", new Thing { Size = 20 } },
@@ -58,12 +58,12 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 
                 var expected = true;
 
-                return new object[] { actualState, args, expectedState, expected };
+                return new object[] { stateActual, args, stateExpected, expected };
             }
 
             static object[] ClosedBox_ThingWithSizeLessThanAvailableSpace_UniqueLabel_ThingNotAddedIntoBox_FalseExpected()
             {
-                var actualState = new Box(
+                var stateActual = new Box(
                      new Dictionary<string, Thing>
                      {
                         { "Label1", new Thing { Size = 10 } },
@@ -80,7 +80,7 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
                     Label = "Label3"
                 };
 
-                var expectedState = new Box(
+                var stateExpected = new Box(
                      new Dictionary<string, Thing>
                      {
                         { "Label1", new Thing { Size = 10 } },
@@ -93,17 +93,17 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 
                 var expected = false;
 
-                return new object[] { actualState, args, expectedState, expected };
+                return new object[] { stateActual, args, stateExpected, expected };
             }
         }
 
         [Theory]
         [ClassData(typeof(TestCases))]
-        public static void Test(Box actualState, Args args, Box expectedState, bool expected)
+        public static void Test(Box stateActual, Args args, Box stateExpected, bool expected)
         {
-            var actual = actualState.PutInside(args.Thing, args.Label);
+            var actual = stateActual.PutInside(args.Thing, args.Label);
 
-            Assert.Equal(expectedState, actualState);
+            Assert.Equal(stateExpected, stateActual);
             Assert.Equal(expected, actual);
         }
     }

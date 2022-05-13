@@ -5,7 +5,7 @@ using Xunit;
 
 namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.BoxTests
 {
-    public static class GetAvailableSpaceTests
+    public static class GetAvailableSpaceTest
     {
         sealed class TestCases : IEnumerable<object[]>
         {
@@ -24,14 +24,14 @@ namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.BoxTests
             {
                 var boxSize = 100;
 
-                var actualState = new Box
+                var stateActual = new Box
                 {
                     Size = boxSize,
                 };
 
                 var expected = boxSize;
 
-                return new object[] { actualState, expected };
+                return new object[] { stateActual, expected };
             }
 
             static object[] NonEmptyBox_AvailableSpaceLessThanSize()
@@ -46,22 +46,22 @@ namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.BoxTests
 
                 var thingSizeSum = things.Sum(thing => thing.Size);
 
-                var actualState = new Box(things.ToDictionary(thing => "Label" + thing.Size.ToString(), thing => thing))
+                var stateActual = new Box(things.ToDictionary(thing => "Label" + thing.Size.ToString(), thing => thing))
                 {
                     Size = boxSize,
                 };
 
                 var expected = boxSize - thingSizeSum;
 
-                return new object[] { actualState, expected };
+                return new object[] { stateActual, expected };
             }
         }
 
         [Theory]
         [ClassData(typeof(TestCases))]
-        public static void Test(Box actualState, int expected)
+        public static void Test(Box stateActual, int expected)
         {
-            var actual = actualState.GetAvailableSpace();
+            var actual = stateActual.GetAvailableSpace();
 
             Assert.Equal(expected, actual);
         }

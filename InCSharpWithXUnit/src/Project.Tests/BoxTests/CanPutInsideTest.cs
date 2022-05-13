@@ -5,7 +5,7 @@ using Xunit;
 
 namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 {
-    public static class CanPutInsideTests
+    public static class CanPutInsideTest
     {
         public sealed record Args
         {
@@ -28,7 +28,7 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 
             static object[] OpenBox_ThingWithSizeLessThanAvailableSpace_UniqueLabel_TrueExpected()
             {
-                var actualState = new Box(
+                var stateActual = new Box(
                     new Dictionary<string, Thing>
                     {
                         { "Label1", new Thing { Size = 10 } },
@@ -47,12 +47,12 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 
                 var expected = true;
 
-                return new object[] { actualState, args, expected };
+                return new object[] { stateActual, args, expected };
             }
 
             static object[] ClosedBox_ThingWithSizeLessThanAvailableSpace_UniqueLabel_FalseExpected()
             {
-                var actualState = new Box(
+                var stateActual = new Box(
                    new Dictionary<string, Thing>
                    {
                         { "Label1", new Thing { Size = 10 } },
@@ -71,15 +71,15 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 
                 var expected = false;
 
-                return new object[] { actualState, args, expected };
+                return new object[] { stateActual, args, expected };
             }
         }
 
         [Theory]
         [ClassData(typeof(TestCases))]
-        public static void Test(Box actualState, Args args, bool expected)
+        public static void Test(Box stateActual, Args args, bool expected)
         {
-            var actual = actualState.CanPutInside(args.Thing, args.Label);
+            var actual = stateActual.CanPutInside(args.Thing, args.Label);
 
             Assert.Equal(expected, actual);
         }
