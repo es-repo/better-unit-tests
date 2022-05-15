@@ -99,7 +99,11 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 
         [Theory]
         [ClassData(typeof(TestCases))]
-        public static void Test(Box stateActual, Args args, Box stateExpected, bool expected)
+        public static void Test(
+            Box stateActual, 
+            Args args, 
+            Box stateExpected, 
+            bool expected)
         {
             var actual = stateActual.PutInside(args.Thing, args.Label);
 

@@ -4,7 +4,10 @@
 
     public static class Operations
     {
-        public static Dictionary<string, Thing> FillBox(IBox box, IDictionary<string, Thing> labelsAndThings, WriteLog writeLog)
+        public static Dictionary<string, Thing> FillBox(
+            IBox box, 
+            IDictionary<string, Thing> labelsAndThings, 
+            WriteLog writeLog)
         {
             var rest = new Dictionary<string, Thing>();
 

@@ -77,7 +77,10 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
 
         [Theory]
         [ClassData(typeof(TestCases))]
-        public static void Test(Box stateActual, Args args, bool expected)
+        public static void Test(
+            Box stateActual, 
+            Args args, 
+            bool expected)
         {
             var actual = stateActual.CanPutInside(args.Thing, args.Label);
 

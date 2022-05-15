@@ -26,17 +26,19 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.OperationsTests
 
             public void Open()
             {
-                callTrace.Add<IBox>(box => box.Open());
+                callTrace.Add((IBox box) => box.Open());
             }
 
             public void Close()
             {
-                callTrace.Add<IBox>(box => box.Close());
+                callTrace.Add((IBox box) => box.Close());
             }
 
-            public bool PutInside(Thing thing, string label)
+            public bool PutInside(
+                Thing thing,
+                string label)
             {
-                callTrace.Add<IBox>(box => box.PutInside(thing, label));
+                callTrace.Add((IBox box) => box.PutInside(thing, label));
 
                 return !label.EndsWith("Ignore");
             }
@@ -46,7 +48,7 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.OperationsTests
         {
             return message =>
             {
-                callTrace.Add<WriteLog>(writeLog => writeLog(message));
+                callTrace.Add((WriteLog writeLog) => writeLog(message));
             };
         }
 
@@ -76,15 +78,14 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.OperationsTests
                     WriteLog = CreateWriteLogMock(callTraceActual)
                 };
 
-                var callTraceExpected = new CallTrace();
-
-                callTraceExpected.Add<IBox>(box => box.Open());
-                callTraceExpected.Add<WriteLog>(writeLog => writeLog("The box is opened."));
-                callTraceExpected.Add<IBox>(box => box.PutInside(new Thing { Size = 1 }, "Label 1"));
-                callTraceExpected.Add<IBox>(box => box.PutInside(new Thing { Size = 2 }, "Label 2 Ignore"));
-                callTraceExpected.Add<IBox>(box => box.PutInside(new Thing { Size = 3 }, "Label 3"));
-                callTraceExpected.Add<IBox>(box => box.Close());
-                callTraceExpected.Add<WriteLog>(writeLog => writeLog("The box is closed."));
+                var callTraceExpected = new CallTrace(
+                    (IBox box) => box.Open(),
+                    (WriteLog writeLog) => writeLog("The box is opened."),
+                    (IBox box) => box.PutInside(new Thing { Size = 1 }, "Label 1"),
+                    (IBox box) => box.PutInside(new Thing { Size = 2 }, "Label 2 Ignore"),
+                    (IBox box) => box.PutInside(new Thing { Size = 3 }, "Label 3"),
+                    (IBox box) => box.Close(),
+                    (WriteLog writeLog) => writeLog("The box is closed."));
 
                 var expected = new Dictionary<string, Thing>
                 {
@@ -99,7 +100,11 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.OperationsTests
 
         [Theory]
         [ClassData(typeof(TestCases))]
-        public static void Test(Args args, CallTrace callTraceActual, CallTrace callTraceExpected, Dictionary<string, Thing> expected)
+        public static void Test(
+            Args args,
+            CallTrace callTraceActual,
+            CallTrace callTraceExpected,
+            Dictionary<string, Thing> expected)
         {
             var actual = Operations.FillBox(args.Box, args.LabelsAndThings, args.WriteLog);
 

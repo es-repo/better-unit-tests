@@ -40,7 +40,9 @@
             return IsOpen && GetAvailableSpace() - thing.Size >= 0 && !thingsInside.ContainsKey(label);
         }
 
-        public bool PutInside(Thing thing, string label)
+        public bool PutInside(
+            Thing thing, 
+            string label)
         {
             if (!CanPutInside(thing, label))
             {
