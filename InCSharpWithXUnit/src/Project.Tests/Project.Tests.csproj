@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <AssemblyName>BetterUnitTests.InCSharpWithXUnit.Project.Tests</AssemblyName>
-    <RootNamespace>BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests</RootNamespace>
+    <RootNamespace>BetterUnitTests.InCSharpWithXUnit.Project.Tests</RootNamespace>
     <Nullable>enable</Nullable>
     <WarningsAsErrors>CS8600;CS8602;CS8603;CS8618;CS8625;CS8604</WarningsAsErrors>
   </PropertyGroup>

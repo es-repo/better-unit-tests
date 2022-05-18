@@ -7,7 +7,7 @@
         void Close();
 
         bool PutInside(
-            Thing thing, 
+            Thing thing,
             string label);
     }
 }

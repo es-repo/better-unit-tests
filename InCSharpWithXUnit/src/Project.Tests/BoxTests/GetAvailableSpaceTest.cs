@@ -60,7 +60,7 @@ namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.BoxTests
         [Theory]
         [ClassData(typeof(TestCases))]
         public static void Test(
-            Box stateActual, 
+            Box stateActual,
             int expected)
         {
             var actual = stateActual.GetAvailableSpace();

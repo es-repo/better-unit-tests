@@ -1,9 +1,8 @@
-﻿using BetterUnitTests.InCSharpWithXUnit.Project;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Xunit;
 
-namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
+namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.BoxTests
 {
     public static class PutInsideTest
     {
@@ -100,9 +99,9 @@ namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.BoxTests
         [Theory]
         [ClassData(typeof(TestCases))]
         public static void Test(
-            Box stateActual, 
-            Args args, 
-            Box stateExpected, 
+            Box stateActual,
+            Args args,
+            Box stateExpected,
             bool expected)
         {
             var actual = stateActual.PutInside(args.Thing, args.Label);

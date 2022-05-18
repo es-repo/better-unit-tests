@@ -1,10 +1,9 @@
-﻿using BetterUnitTests.InCSharpWithXUnit.Project;
-using CallTracing;
+﻿using CallTracing;
 using System.Collections;
 using System.Collections.Generic;
 using Xunit;
 
-namespace BetterUnitTests.InCSharpWithXUnit.ProjectProject.Tests.OperationsTests
+namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.OperationsTests
 {
     public static class FillBoxTest
     {

@@ -4,9 +4,14 @@
     {
         private readonly Dictionary<string, Thing> thingsInside;
 
-        public bool IsOpen { get; set; }
-
         public int Size { get; init; }
+
+        public bool IsOpen { get; internal set; }
+
+        public Box()
+        {
+            thingsInside = new();
+        }
 
         /// <summary>
         /// Internal constructor to set initial state for test purpose.
@@ -14,10 +19,6 @@
         internal Box(Dictionary<string, Thing> thingsInside)
         {
             this.thingsInside = thingsInside;
-        }
-
-        public Box() : this(new Dictionary<string, Thing>())
-        {
         }
 
         public void Open()
@@ -41,7 +42,7 @@
         }
 
         public bool PutInside(
-            Thing thing, 
+            Thing thing,
             string label)
         {
             if (!CanPutInside(thing, label))
