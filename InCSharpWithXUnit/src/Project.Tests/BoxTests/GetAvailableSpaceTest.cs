@@ -13,14 +13,12 @@ namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.BoxTests
 
             public IEnumerator<object[]> GetEnumerator()
             {
-                // 1.
-                yield return EmptyBox_AvailableSpaceEqualToSize();
+                yield return EmptyBox_AvailableSpaceEqualToSize_1();
 
-                // 2.
-                yield return NonEmptyBox_AvailableSpaceLessThanSize();
+                yield return NonEmptyBox_AvailableSpaceLessThanSize_2();
             }
 
-            static object[] EmptyBox_AvailableSpaceEqualToSize()
+            static object[] EmptyBox_AvailableSpaceEqualToSize_1()
             {
                 var boxSize = 100;
 
@@ -34,7 +32,7 @@ namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.BoxTests
                 return new object[] { stateActual, expected };
             }
 
-            static object[] NonEmptyBox_AvailableSpaceLessThanSize()
+            static object[] NonEmptyBox_AvailableSpaceLessThanSize_2()
             {
                 var boxSize = 100;
 

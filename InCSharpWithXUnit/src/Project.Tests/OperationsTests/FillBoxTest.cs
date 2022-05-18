@@ -55,11 +55,10 @@ namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.OperationsTests
         {
             public IEnumerator<object[]> GetEnumerator()
             {
-                // 1.
-                yield return BoxMock_LabelsAndThings_BoxMockCallsOpenThenPutInsideThenClose_ThingsWithLabelEndWithIngoreExpected();
+                yield return BoxMock_LabelsAndThings_BoxMockCallsOpenThenPutInsideThenClose_ThingsWithLabelEndWithIngoreExpected_1();
             }
 
-            static object[] BoxMock_LabelsAndThings_BoxMockCallsOpenThenPutInsideThenClose_ThingsWithLabelEndWithIngoreExpected()
+            static object[] BoxMock_LabelsAndThings_BoxMockCallsOpenThenPutInsideThenClose_ThingsWithLabelEndWithIngoreExpected_1()
             {
                 var callTraceActual = new CallTrace();
 
