@@ -61,6 +61,12 @@ Test method has following parameters:
 - `CallTrace callTraceExpected` - an instance of [CallTrace](https://github.com/es-repo/CallTracing) which contains an expected trace of mock calls. If the test is not supposed to test mock calls then this parameter is omitted.
 - `{TypeOfReturnValue} expected` - a value which is expected to be equal to the value returned by the method under test. If the method returns nothing then this parameter is omitted.
 
+### Body
+
+Body of a test method should call the method under test and then verify that actual and expected states, call traces of mocks and returned values are equal. It should preferably use only Assert.Equal assertions to keep code concise.
+
+_NOTE: This puts requirements on types under test to have implementation of Equals which ensure that two instances are equal if all their property and field values match. In turn implementation of `Equals` method also requires implementation of `GetHashCode`. To reduce the custom implementations using [records](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/types/records#value-equality) instead of classes and structs is advised. However the default `Equals` implementation of a record may not be enough if any of its field or property type has implemented referential equality. In that case custom implementation still is required to use `Assert.Equal` only assertion. Sometimes using of records may not be possible or such custom `Equals` implementation may cause performance issues. In those cases the decision of following the proposing guidelines or deviating from them should be taken by a developer meaningfully._
+
 ### Structure
 
 ```C#
