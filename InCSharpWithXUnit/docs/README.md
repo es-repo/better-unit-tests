@@ -23,7 +23,7 @@ A method under test has a corresponding test file. If a method is named `{Method
 ## Test class
 
 If a method under test named `{MethodName}`, then test class is named `{MethodName}Test`.
-A test class has only one test method named `Test` with `[Theory]` and `[ClassData(typeof(TestCases))]` attributes. 
+A test class is static and has only one test method named `Test` with `[Theory]` and `[ClassData(typeof(TestCases))]` attributes. 
 A test class has `TestCases` nested class which yields arguments for the `Test` method for every test case.
 A test class has nested `Args` record. `Args` record contains arguments to be passed to method under test.
 
@@ -35,12 +35,7 @@ public static class {MethodName}Test
     public sealed record Args {...}        
     
     sealed class TestCases : IEnumerable<object[]>
-    {
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-    
-        public IEnumerator<object[]> GetEnumerator()
-        {...}
-    }
+    {...}
         
     [Theory]
     [ClassData(typeof(TestCases))]
@@ -53,7 +48,7 @@ public static class {MethodName}Test
 
 ### Parameters
 
-Test method has following parameters:
+A test method has following parameters:
 - `{TypeOfInstance} stateActual` - an instance of a type method of which is under test. If the method is static, then this parameter is omitted. 
 - `Args args` - an instance of `Args` which is used to pass arguments to the method under test. If the method does not have parameters, then this parameter is omitted. 
 - `CallTrace callTraceActual` - an instance of [CallTrace](https://github.com/es-repo/CallTracing) which contains an actual trace of mock calls. If the test is not supposed to test mock calls then this parameter is omitted.
@@ -63,9 +58,9 @@ Test method has following parameters:
 
 ### Body
 
-Body of a test method should call the method under test and then verify that actual and expected states, call traces of mocks and returned values are equal. It should preferably use only `Assert.Equal` assertions to keep code concise.
+The body of a test method should call the method under test and then verify that actual and expected states, call traces of mocks, and returned values are equal. It should preferably use only `Assert.Equal` assertions to keep code concise.
 
-_NOTE: This puts requirements on types under test to have implementation of `Equals` method which ensure that two instances are equal if all their property and field values match. In turn implementation of `Equals` method also requires implementation of `GetHashCode`. To reduce the custom implementations using records instead of classes and structs is advised. However, the default `Equals` implementation of a record may not be enough if any of its field or property type has implemented equality by reference implementation. In that case custom implementation still is required to use `Assert.Equal` only assertion. Sometimes using of records may not be possible or such custom `Equals` implementation may cause performance issues. In those cases the decision of following the proposing guidelines or deviating from them should be taken by a developer meaningfully._
+_NOTE: This puts requirements on types under test to have an implementation of `Equals` method which ensures that two instances are equal if all their property and field values match. In turn implementation of `Equals` method also requires implementation of `GetHashCode`. To reduce the custom implementations using records instead of classes and structs is advised. However, the default `Equals` implementation of a record may not be enough if any of its field or property types have equality by reference implementation. In that case, custom implementation still is required to use `Assert.Equal` only assertion. Sometimes using records may not be possible or such custom `Equals` implementation may cause performance issues. Then the decision of following the proposing guidelines exactly or deviating from them should be taken by a developer meaningfully._
 
 ### Structure
 
@@ -90,7 +85,7 @@ public static void Test(
 
 ## Test cases
 
-For every test case `TestCases` class has a static method returning an array of objects to be passed as arguments to the `Test` method. Name of a test case method should describe the test case and preferably be in form of `{stateActualDescription}_{argsDescription}_{stareExpectedDescription}_{etc...}_{n}` where `n` is a serial number of test case. Serial number is required to simplify finding a failed test.
+For every test case, `TestCases` class has a static method returning an array of objects to be passed as arguments to the `Test` method. The name of a test case method should describe the test case and preferably be in form of `{stateActualDescription}_{argsDescription}_{stareExpectedDescription}_{etc...}_{n}` where `n` is a serial number of a test case. A serial number is required to simplify finding a failed test.
 
 ### Structure 
 
@@ -129,9 +124,9 @@ sealed class TestCases : IEnumerable<object[]>
 }
 ```
 
-## Example
+## Examples
 
-Example can be found [here](https://github.com/es-repo/better-unit-tests/tree/main/InCSharpWithXUnit/src).
+Examples can be found [here](https://github.com/es-repo/better-unit-tests/tree/main/InCSharpWithXUnit/src).
 
 
 
