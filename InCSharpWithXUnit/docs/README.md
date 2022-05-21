@@ -60,7 +60,7 @@ A test method has following parameters:
 
 The body of a test method should call the method under test and then verify that actual and expected states, call traces of mocks, and returned values are equal. It should preferably use only `Assert.Equal` assertions to keep code concise.
 
-_NOTE: This puts requirements on types under test to have an implementation of `Equals` method which ensures that two instances are equal if all their property and field values match. In turn implementation of `Equals` method also requires implementation of `GetHashCode`. To reduce the custom implementations using records instead of classes and structs is advised. However, the default `Equals` implementation of a record may not be enough if any of its field or property types have equality by reference implementation. In that case, custom implementation still is required to use `Assert.Equal` only assertion. Sometimes using records may not be possible or such custom `Equals` implementation may cause performance issues. Then the decision of following the proposing guidelines exactly or deviating from them should be taken by a developer meaningfully._
+_NOTE: Using only `Assert.Equal` assertions puts requirements on types under test to have such implementation of `Equals` method which ensures that two instances are equal if all their property and field values match. In turn implementation of `Equals` method also requires implementation of `GetHashCode`. To reduce the custom implementations using records instead of classes and structs is advised. However, the default `Equals` implementation of a record may not be enough if any of its field or property types have equality by reference implementation. In that case, custom implementation still is required. Sometimes using records may not be possible or such custom `Equals` implementation may cause performance issues. Then the decision of following the proposing guidelines exactly or deviating from them should be taken by a developer meaningfully._
 
 ### Structure
 
@@ -85,7 +85,7 @@ public static void Test(
 
 ## Test cases
 
-For every test case, `TestCases` class has a static method returning an array of objects to be passed as arguments to the `Test` method. The name of a test case method should describe the test case and preferably be in form of `{stateActualDescription}_{argsDescription}_{stareExpectedDescription}_{etc...}_{n}` where `n` is a serial number of a test case. A serial number is required to simplify finding a failed test.
+For every test case, `TestCases` class has a static method returning an array of objects to be passed as arguments to the `Test` method. The name of a test case method should describe the test case and preferably be in form of `{stateActualDescription}_{argsDescription}_{stateExpectedDescription}_{etc...}_{n}` where `n` is a serial number of a test case. A serial number is required to simplify finding a failed test.
 
 ### Structure 
 
