@@ -22,10 +22,10 @@ A method under test has a corresponding test file. If a method is named `{Method
 
 ## Test class
 
-If a method under test named `{MethodName}`, then test class is named `{MethodName}Test`.
+If a method under test is named `{MethodName}`, then the test class is named `{MethodName}Test`.
 A test class is static and has only one test method named `Test` with `[Theory]` and `[ClassData(typeof(TestCases))]` attributes. 
-A test class has `TestCases` nested class which yields arguments for the `Test` method for every test case.
-A test class has nested `Args` record. `Args` record contains arguments to be passed to method under test.
+A test class has a `TestCases` nested class which yields arguments for the `Test` method for every test case.
+A test class has a nested `Args` record. `Args` record contains arguments to be passed to the method under test.
 
 ### Structure
 
