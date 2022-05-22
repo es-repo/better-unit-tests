@@ -18,12 +18,12 @@ namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.BoxTests
 
             public IEnumerator<object[]> GetEnumerator()
             {
-                yield return OpenBox_ThingWithSizeLessThanAvailableSpace_UniqueLabel_ThingAddedIntoBox_TrueExpected_1();
+                yield return OpenBox_ThingFitsIntoBoxAndUniqueLabel_ThingAddedIntoBox_TrueExpected_1();
 
-                yield return ClosedBox_ThingWithSizeLessThanAvailableSpace_UniqueLabel_ThingNotAddedIntoBox_FalseExpected_2();
+                yield return ClosedBox_ThingFitsIntoBoxAndUniqueLabel_ThingNotAddedIntoBox_FalseExpected_2();
             }
 
-            static object[] OpenBox_ThingWithSizeLessThanAvailableSpace_UniqueLabel_ThingAddedIntoBox_TrueExpected_1()
+            static object[] OpenBox_ThingFitsIntoBoxAndUniqueLabel_ThingAddedIntoBox_TrueExpected_1()
             {
                 var stateActual = new Box(
                     new Dictionary<string, Thing>
@@ -58,7 +58,7 @@ namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.BoxTests
                 return new object[] { stateActual, args, stateExpected, expected };
             }
 
-            static object[] ClosedBox_ThingWithSizeLessThanAvailableSpace_UniqueLabel_ThingNotAddedIntoBox_FalseExpected_2()
+            static object[] ClosedBox_ThingFitsIntoBoxAndUniqueLabel_ThingNotAddedIntoBox_FalseExpected_2()
             {
                 var stateActual = new Box(
                      new Dictionary<string, Thing>
