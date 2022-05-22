@@ -1,5 +1,10 @@
 # Proposal for structuring unit test code in C# with xUnit
 
+Unit testing is one of the fundamental practices for building reliable software. Different developers and different teams write and organize unit test code in different ways. And it often happens that unit test code with time turns into long, poorly organized files which are hard to maintain and reason about. In addition to this, various auxiliary libraries are often used, such as fluent assertions and mocking libraries, which, despite their effectiveness and usefulness, make the unit test code even more motley and difficult to read. 
+
+This proposal represents guidelines on how to write concise well-organized unit tests in C# using XUnit test framework and do not rely much on the auxiliary libraries. The guidelines bring recommended character and deviations from the guideline are absolutely acceptable due to various reasons.
+
+
 ## Projects
 
 A project under test has a corresponding unit test project. If a project is named `{ProjectName}`, then the unit test project is named `{ProjectName}.Tests`.
