@@ -1,6 +1,6 @@
 # Proposal for structuring unit test code in C# with xUnit
 
-Unit testing is one of the fundamental practices for building reliable software. Different developers and different teams write and organize unit test code in different ways. And it often happens that unit test code with time turns into long, poorly organized files which are hard to maintain and reason about. In addition to this, various auxiliary libraries are often used, such as fluent assertions and mocking libraries, which, despite their effectiveness and usefulness, make the unit test code even more motley and difficult to read. 
+Unit testing is one of the fundamental practices of developing reliable software. Different developers and teams write and organize unit test code in different ways. And it often happens that unit test code with time turns into long, poorly organized files which are hard to maintain and reason about. In addition to this, various auxiliary libraries are often used, such as fluent assertions and mocking libraries, which, despite their effectiveness and usefulness, make the unit test code even more motley and difficult to read.
 
 This proposal represents guidelines on how to write concise well-organized unit tests in C# using xUnit test framework and do not rely much on the auxiliary libraries.
 
@@ -66,7 +66,7 @@ A test method has following parameters:
 
 The body of a test method should call the method under test and then verify that actual and expected states, call traces of mocks, and returned values are equal. It should preferably use only `Assert.Equal` assertions to keep code concise.
 
-_NOTE: Using only `Assert.Equal` assertions puts requirements on types under test to have such implementation of `Equals` method which ensures that two instances are equal if all their property and field values match. In turn implementation of `Equals` method also requires implementation of `GetHashCode`. To reduce the custom implementations using records instead of classes and structs is advised. However, the default `Equals` implementation of a record may not be enough if any of its field or property types have equality by reference implementation. In that case, custom implementation still is required. Sometimes using records may not be possible or such custom `Equals` implementation may cause performance issues. Then the decision of following the proposing guidelines exactly or deviating from them should be taken by a developer meaningfully._
+_NOTE: Using only `Assert.Equal` assertions puts requirements on the types under test to have such implementation of the `Equals` method which ensures that two instances are equal if all their property and field values match. In turn, implementation of the `Equals` method also requires implementing `GetHashCode`. To reduce the custom implementations using records instead of classes and structs is advised. However, the default `Equals` implementation of a record may not be enough if any of its field or property types have equality by reference implementation. In that case, custom implementation still is required. Sometimes using records may not be possible or such custom `Equals` implementation may cause performance issues. Then the decision of following the proposing guidelines exactly or deviating from them should be carefully considered by a developer._
 
 ### Structure
 
@@ -91,7 +91,7 @@ public static void Test(
 
 ## Test cases
 
-For every test case, `TestCases` class has a static method returning an array of objects to be passed as arguments to the `Test` method. The name of a test case method should describe the test case and preferably be in form of `{stateActualDescription}_{argsDescription}_{stateExpectedDescription}_{etc...}_{n}` where `n` is a serial number of a test case. A serial number is required to simplify finding a failed test.
+For every test case, `TestCases` class has a static method returning an array of objects to be passed as arguments to the `Test` method. The name of a test case method should describe the test case and preferably be in the form of `{stateActualDescription}_{argsDescription}_{stateExpectedDescription}_{etc...}_{n}` where `n` is a serial number of a test case. A serial number is required to simplify finding a failed test.
 
 ### Structure 
 
