@@ -1,8 +1,6 @@
 # Proposal for structuring unit test code in C# with xUnit
 
-Unit testing is one of the fundamental practices of developing reliable software. Different developers and teams write and organize unit test code in different ways. And it often happens that unit test code with time turns into long, poorly organized files which are hard to maintain and reason about. In addition to this, various auxiliary libraries are often used, such as fluent assertions and mocking libraries, which, despite their effectiveness and usefulness, make the unit test code even more motley and difficult to read.
-
-This proposal represents guidelines on how to write concise well-organized unit tests in C# using xUnit test framework and do not rely much on the auxiliary libraries.
+Unit testing is one of the fundamental practices of developing reliable software. Different developers and teams write and organize unit test code in different ways. And it often happens that unit test code with time turns into long, poorly organized files which are hard to maintain and reason about. This proposal represents guidelines on how to write concise well-organized unit tests in C# using xUnit test framework and do not rely much on the auxiliary libraries.
 
 
 ## Projects
@@ -57,14 +55,12 @@ public static class {MethodName}Test
 A test method has following parameters:
 - `{TypeOfInstance} stateActual` - an instance of a type method of which is under test. If the method is static, then this parameter is omitted. 
 - `Args args` - an instance of `Args` which is used to pass arguments to the method under test. If the method does not have parameters, then this parameter is omitted. 
-- `CallTrace callTraceActual` - an instance of [CallTrace](https://github.com/es-repo/CallTracing) which contains an actual trace of mock calls. If the test is not supposed to test mock calls then this parameter is omitted.
-- `CallTrace callTraceExpected` - an instance of [CallTrace](https://github.com/es-repo/CallTracing) which contains an expected trace of mock calls. If the test is not supposed to test mock calls, then this parameter is omitted.
 - `{TypeOfInstance} stateExpected`  - an instance of a type, method of which is under test, with state which is expected to be equal to the state of `stateActual` after the method is called. If the method is static or does not change the state of the object, then this parameter is omitted.
 - `{TypeOfReturnValue} expected` - a value which is expected to be equal to the value returned by the method under test. If the method returns nothing, then this parameter is omitted.
 
 ### Body
 
-The body of a test method should call the method under test and then verify that actual and expected states, call traces of mocks, and returned values are equal. It should preferably use only `Assert.Equal` assertions to keep code concise.
+The body of a test method should call the method under test and then verify that actual and expected states, and returned values are equal. It should preferably use only `Assert.Equal` assertions to keep code concise.
 
 _NOTE: Using only `Assert.Equal` assertions puts requirements on the types under test to have such implementation of the `Equals` method which ensures that two instances are equal if all their property and field values match. In turn, implementation of the `Equals` method also requires implementing `GetHashCode`. To reduce the custom implementations using records instead of classes and structs is advised. However, the default `Equals` implementation of a record may not be enough if any of its field or property types have equality by reference implementation. In that case, custom implementation still is required. Sometimes using records may not be possible or such custom `Equals` implementation may cause performance issues. Then the decision of following the proposing guidelines exactly or deviating from them should be carefully considered by a developer._
 
@@ -75,15 +71,12 @@ _NOTE: Using only `Assert.Equal` assertions puts requirements on the types under
 [ClassData(typeof(TestCases))]
 public static void Test(
   {TypeOfInstance} stateActual, 
-  Args args, 
-  CallTrace callTraceActual,
-  CallTrace callTraceExpected,
+  Args args,
   {TypeOfInstance} stateExpected,
   {ReturnValueType} expected)
 {
   var actual = stateActual.{TestedMethod}(args.{...}, args.{...}, ...);
     
-  Assert.Equal(callTraceExpected, callTraceActual);
   Assert.Equal(stateExpected, stateActual);
   Assert.Equal(expected, actual);
 }
@@ -112,12 +105,10 @@ sealed class TestCases : IEnumerable<object[]>
     {
         var stateActual = ...;
         var args = ...;
-        var callTraceActual = ...;
-        var callTraceExpected = ...;
         var stateExpected = ...;
         var expected = ...;
         
-        return new object[] { stateActual, args, stateExpected, callTraceActual, callTraceExpected };
+        return new object[] { stateActual, args, stateExpected, expected };
     }
 
     static object[] {TestCaseDescription}_2()
