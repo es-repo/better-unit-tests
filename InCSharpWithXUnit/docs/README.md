@@ -125,5 +125,9 @@ sealed class TestCases : IEnumerable<object[]>
 
 Examples can be found [here](https://github.com/es-repo/better-unit-tests/tree/main/InCSharpWithXUnit/src).
 
+## Articles
+
+- [Part 1](https://medium.com/@eugene_s/better-unit-tests-in-c-with-xunit-87c6abf7970a)
+- [Part 2](https://medium.com/@eugene_s/better-unit-tests-in-c-with-xunit-part-2-mocking-5f024622b691)
 
 
