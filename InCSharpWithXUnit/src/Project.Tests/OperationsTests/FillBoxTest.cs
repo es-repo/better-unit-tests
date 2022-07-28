@@ -5,7 +5,7 @@ using Moq;
 
 namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.OperationsTests
 {
-    public static class FillBoxTestWithMoq
+    public static class FillBoxTest
     {
         public sealed record Args
         {
@@ -18,10 +18,10 @@ namespace BetterUnitTests.InCSharpWithXUnit.Project.Tests.OperationsTests
         {
             public IEnumerator<object[]> GetEnumerator()
             {
-                yield return BoxMockAndLabelsAndThings_OpenBoxThenPutThingInsideThenCloseBoxAndWriteLogs_ThingsWithLabelEndedWithIgnoreExpected_1();
+                yield return BoxAndLabelsAndThings_OpenBoxThenPutThingInsideThenCloseBoxAndWriteLogs_ThingsWithLabelEndedWithIgnoreExpected_1();
             }
 
-            static object[] BoxMockAndLabelsAndThings_OpenBoxThenPutThingInsideThenCloseBoxAndWriteLogs_ThingsWithLabelEndedWithIgnoreExpected_1()
+            static object[] BoxAndLabelsAndThings_OpenBoxThenPutThingInsideThenCloseBoxAndWriteLogs_ThingsWithLabelEndedWithIgnoreExpected_1()
             {
                 var writeLogMock = new Mock<WriteLog>(MockBehavior.Strict);
                 var boxMock = new Mock<IBox>(MockBehavior.Strict);

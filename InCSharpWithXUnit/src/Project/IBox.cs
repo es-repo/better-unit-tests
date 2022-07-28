@@ -2,6 +2,8 @@
 {
     public interface IBox
     {
+        public int Size { get; }
+
         void Open();
 
         void Close();
