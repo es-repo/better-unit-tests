@@ -1,6 +1,6 @@
 # Proposal for structuring unit test code in C# with xUnit
 
-Unit testing is one of the fundamental practices of developing reliable software. Different developers and teams write and organize unit test code in different ways. And it often happens that unit test code with time turns into long, poorly organized files which are hard to maintain and reason about. This proposal represents guidelines on how to write concise well-organized unit tests in C# using xUnit test framework and do not rely much on the auxiliary libraries.
+Unit testing is one of the fundamental practices of developing reliable software. Different developers and teams write and organize unit test code in different ways. And it often happens that unit test code with time turns into long, poorly organized files which are hard to maintain and reason about. This proposal represents guidelines on how to write concise well-organized unit tests in C# using xUnit test framework.
 
 
 ## Projects
